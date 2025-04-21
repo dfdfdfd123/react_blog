@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Row, Col, Container, Button } from "reactstrap";
-import cardImage from "../assets/image.jpg"; // image.jpg를 여기에 위치시키세요
+import cardImage from "../../assets/image.jpg"; // image.jpg를 여기에 위치시키세요
 
 function CardList() {
     const cardData = [

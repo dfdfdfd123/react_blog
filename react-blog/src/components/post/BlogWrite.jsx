@@ -1,3 +1,6 @@
+
+import { Link } from 'react-router-dom';
+
 function BlogWrite() {
     return (
         <div>
@@ -21,8 +24,8 @@ function BlogWrite() {
                             </div>
                             <div className="mt-3">
                                 <div className="form-floating">
-                                    <textarea className="form-control" id="contents" name="contents" row="10"
-                                              placeholder="글 내용" style="height: 150px;"></textarea>
+                                 <textarea className="form-control" id="contents" name="contents" rows="10" placeholder="글 내용"
+                                    style={{ height: "150px" }}></textarea>
                                     <label htmlFor="contents">글 내용</label>
                                 </div>
                             </div>

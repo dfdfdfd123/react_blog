@@ -1,7 +1,13 @@
 import React from "react";
 import { Navbar, NavbarBrand, Input, Button, Container } from "reactstrap";
+import { useNavigate } from "react-router-dom"; // ← 추가
+
 
 function CustomNavbar() {
+
+    const navigate = useNavigate(); // ← 추가
+
+
     return (
         <Navbar dark color="dark" expand="md" className="py-2">
             <Container>
@@ -20,7 +26,7 @@ function CustomNavbar() {
                             className="me-2"
                             style={{ width: '700px' }}
                         />
-                        <Button color="success me-2" size="sm">글 작성</Button>
+                        <Button color="success me-2" size="sm"  onClick={() => navigate("/write")}>글 작성</Button>
                         <Button color="secondary" size="sm" className="me-2">REGISTER</Button>
                         <Button color="secondary" size="sm">LOGIN</Button>
                     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import {Row, Col, Container} from "reactstrap";
-import backgroundImage from "../assets/image2.jpg"; // 상대경로로 불러오기
+import backgroundImage from "../../assets/image2.jpg"; // 상대경로로 불러오기
 
 function Header() {
     const headerStyle = {
