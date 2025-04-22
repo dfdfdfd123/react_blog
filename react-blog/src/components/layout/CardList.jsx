@@ -1,8 +1,12 @@
 import React from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText, Row, Col, Container, Button } from "reactstrap";
-import cardImage from "../../assets/image.jpg"; // image.jpg를 여기에 위치시키세요
+import {useNavigate} from "react-router-dom";
+import cardImage from "../../assets/image2.jpg";
 
 function CardList() {
+
+    const navigate = useNavigate(); // ← 추가
+
     const cardData = [
         { id: 1, title: "첫 번째 카드", text: "설명 텍스트입니다." },
         { id: 2, title: "두 번째 카드", text: "다른 설명 텍스트입니다." },
@@ -22,7 +26,7 @@ function CardList() {
                             <CardBody>
                                 <CardTitle tag="h5">{card.title}</CardTitle>
                                 <CardText>{card.text}</CardText>
-                                <Button color="primary">자세히 보기</Button>
+                                <Button color="primary" onClick={() => navigate("/detail")}>자세히 보기</Button>
                             </CardBody>
                         </Card>
                     </Col>
