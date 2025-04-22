@@ -1,3 +1,7 @@
+
+
+// 댓글 테이블
+
 package bitc.fullstack503.server.dto;
 
 import lombok.Data;
