@@ -6,6 +6,8 @@ import CustomNavbar from "./components/layout/CustomNavbar.jsx";
 import CardList from "./components/layout/CardList.jsx";
 import Home from "./components/Home.jsx";
 import BlogWrite from "./components/post/BlogWrite.jsx";
+import BlogDetail from "./components/post/BlogDetail.jsx";
+import BlogEdit from "./components/post/BlogEdit.jsx";
 
 
 
@@ -23,6 +25,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/write" element={<BlogWrite />} />
+                <Route path="/detail" element={<BlogDetail />} />
+                <Route path="/edit" element={<BlogEdit />} />
             </Routes>
 
             {/* Footer도 항상 보이게 하고 싶으면 여기 */}
