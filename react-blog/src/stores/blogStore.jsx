@@ -4,7 +4,12 @@ import { create } from 'zustand';
 const useBlogStore = create((set) => ({
     posts: [],
     setPosts: (newPosts) => set({ posts: newPosts }),
-    addPost: (post) => set((state) => ({ posts: [...state.posts, post] }))
+    addPost: (post) => set((state) => ({ posts: [...state.posts, post] })),
+
+    selectedPost: null,
+    setSelectedPost: (post) => set({ selectedPost: post }),
+
+
 }));
 
 export default useBlogStore;

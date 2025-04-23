@@ -7,4 +7,22 @@
         INSERT INTO r_blog_file (board_idx, original_name, stored_name, file_path)
         VALUES (#{boardIdx}, #{originalName}, #{storedName}, #{filePath})
     </insert>
+
+
+    <select id="selectFileByStoredName" parameterType="String" resultType="bitc.fullstack503.server.dto.FileDTO">
+        SELECT * FROM r_blog_file WHERE stored_name = #{storedName}
+    </select>
+
+    <delete id="deleteFileByStoredName" parameterType="String">
+        DELETE FROM r_blog_file WHERE stored_name = #{storedName}
+    </delete>
+
+<!--    글 삭제 시-->
+    <delete id="deleteFilesByBoardIdx" parameterType="int">
+        DELETE FROM r_blog_file
+        WHERE board_idx = #{boardIdx}
+    </delete>
+
+
+
 </mapper>

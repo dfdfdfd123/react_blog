@@ -12,6 +12,15 @@ public interface BoardService {
 
     BoardDTO getBoardDetail(int boardIdx);
     void insertBoard(BoardDTO board, List<MultipartFile> files) throws Exception;
+
+//    글 수정
+void updateBoard(BoardDTO board, List<MultipartFile> files) throws Exception;
+
+// 글 삭제
+void deleteBoard(int boardIdx) throws Exception;
+
+
+
 }
 
 

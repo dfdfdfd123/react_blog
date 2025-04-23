@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
         return boardMapper.selectBoardWithFiles();
     }
 
-
+// 글 상세 보기
     @Override
     public BoardDTO getBoardDetail(int boardIdx) {
 
@@ -40,6 +40,7 @@ public class BoardServiceImpl implements BoardService {
 
     }
 
+//    글 작성
     @Override
     public void insertBoard(BoardDTO board, List<MultipartFile> files) throws Exception {
         boardMapper.insertBoard(board);
@@ -49,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-                    String filePath = "C:/fullstack503/스프링개인프로젝트_임정민/SpringProject/src/main/resources/static/upload/";
+                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
 //                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
@@ -65,5 +66,59 @@ public class BoardServiceImpl implements BoardService {
             }
         }
     }
+
+    // 글 수정
+
+    @Override
+    public void updateBoard(BoardDTO board, List<MultipartFile> files) throws Exception {
+        boardMapper.updateBoard(board);
+
+        if (files != null && !files.isEmpty()) {
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    String originalName = file.getOriginalFilename();
+                    String storedName = UUID.randomUUID() + "_" + originalName;
+                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+
+                    File dest = new File(filePath + storedName);
+                    file.transferTo(dest);
+
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setBoardIdx(board.getBoardIdx());
+                    fileDTO.setOriginalName(originalName);
+                    fileDTO.setStoredName(storedName);
+                    fileDTO.setFilePath("/upload/" + storedName);
+                    fileMapper.insertFile(fileDTO);
+                }
+            }
+        }
+    }
+
+//    글 삭제
+@Override
+public void deleteBoard(int boardIdx) throws Exception {
+    // 1. 파일 리스트 조회
+    List<FileDTO> fileList = boardMapper.selectFilesByBoardIdx(boardIdx);
+
+    // 2. 파일 시스템에서 삭제
+    if (fileList != null && !fileList.isEmpty()) {
+        for (FileDTO file : fileList) {
+            String fullPath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath();
+            File targetFile = new File(fullPath);
+            if (targetFile.exists()) {
+                targetFile.delete();
+            }
+        }
+    }
+
+    // 3. 파일 테이블에서 삭제
+    fileMapper.deleteFilesByBoardIdx(boardIdx);
+
+    // 4. 게시글 논리 삭제
+    boardMapper.deleteBoard(boardIdx);
 }
+
+}
+
+
 

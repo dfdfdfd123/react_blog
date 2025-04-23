@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Container, Row} from "reactstrap";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import useBlogStore from "../../stores/blogStore.jsx";
 
 
 
@@ -20,8 +21,12 @@ function BlogDetail() {
 
     const navigate = useNavigate();
 
+    const { setSelectedPost } = useBlogStore(); // 상단에 추가
+
 
     useEffect(() => {
+
+        // 글 상세 로딩
         axios
             .get(`http://localhost:8080/api/blog/${boardIdx}`)
             .then((res) => {
@@ -49,6 +54,20 @@ function BlogDetail() {
         return <p className="text-center mt-5">게시글을 불러오는 중입니다...</p>;
     }
 
+    // 글 삭제
+    const handlePostDelete = async () => {
+        const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:8080/api/blog/delete/${boardIdx}`);
+            alert('삭제되었습니다.');
+            navigate('/'); // 목록 페이지 등으로 리다이렉트
+        } catch (error) {
+            console.error('삭제 실패:', error);
+            alert('삭제 중 오류가 발생했습니다.');
+        }
+    };
 
 
     // 댓글 작성
@@ -159,10 +178,14 @@ function BlogDetail() {
                             </CardText>
 
                             <div className="d-flex justify-content-end">
-                                <Button color="primary" onClick={() => navigate('/edit')} className="me-2">
+                                <Button color="primary"  className="me-2" onClick={() =>  {
+                                    setSelectedPost(board);  // 선택된 게시글 저장
+                                    // navigate(`/edit`);
+                                    navigate(`/edit/${board.boardIdx}`);
+                                }}>
                                     수정
                                 </Button>
-                                <Button color="danger" onClick={handleDelete}>
+                                <Button color="danger" onClick={handlePostDelete }>
                                     삭제
                                 </Button>
                             </div>

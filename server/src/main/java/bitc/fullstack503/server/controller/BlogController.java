@@ -6,6 +6,7 @@ import bitc.fullstack503.server.dto.FileDTO;
 import bitc.fullstack503.server.mapper.BoardMapper;
 import bitc.fullstack503.server.service.BoardService;
 import bitc.fullstack503.server.service.CommentService;
+import bitc.fullstack503.server.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class BlogController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private FileService fileService;
 
 
     @GetMapping("/ping")
@@ -72,9 +76,48 @@ public class BlogController {
         }
     }
 
+//    글 수정
+
+    @PutMapping("/post/{boardIdx}")
+    public ResponseEntity<?> updateBoard(@PathVariable int boardIdx,
+                                         @ModelAttribute BoardDTO board,
+                                         @RequestParam(value = "files", required = false) List<MultipartFile> files) {
+        try {
+            board.setBoardIdx(boardIdx);
+            boardService.updateBoard(board, files);
+            return ResponseEntity.ok().body("수정 완료");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("수정 실패: " + e.getMessage());
+        }
+    }
+
+//    첨부 파일 삭제
+    @DeleteMapping("/file/{storedName}")
+    public ResponseEntity<?> deleteFile(@PathVariable String storedName) {
+        try {
+            fileService.deleteFile(storedName);
+            return ResponseEntity.ok().body("삭제 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패: " + e.getMessage());
+        }
+    }
+
+//    글 삭제
+@DeleteMapping("/delete/{boardIdx}")
+public ResponseEntity<?> deleteBoard(@PathVariable int boardIdx) {
+    try {
+        boardService.deleteBoard(boardIdx);
+        return ResponseEntity.ok().build();
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 실패: " + e.getMessage());
+    }
+}
 
 
-//     댓글 목록 조회
+
+
+
+    //     댓글 목록 조회
     @GetMapping("/{boardIdx}/comments")
     public List<CommentDTO> getComments(@PathVariable int boardIdx) {
         return commentService.getComments(boardIdx);

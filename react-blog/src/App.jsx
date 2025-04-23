@@ -27,7 +27,8 @@ function App() {
                 <Route path="/write" element={<BlogWrite />} />
                 {/*<Route path="/detail" element={<BlogDetail />} />*/}
                 <Route path="/detail/:boardIdx" element={<BlogDetail />} />
-                <Route path="/edit" element={<BlogEdit />} />
+                {/*<Route path="/edit" element={<BlogEdit />} />*/}
+                <Route path="/edit/:boardIdx" element={<BlogEdit />} />
             </Routes>
             </Layout>
         </BrowserRouter>

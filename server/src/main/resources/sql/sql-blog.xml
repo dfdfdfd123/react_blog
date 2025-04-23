@@ -73,6 +73,8 @@
         WHERE board_idx = #{boardIdx}
     </update>
 
+
+
     <!-- 글 삭제 (논리 삭제) -->
     <update id="deleteBoard" parameterType="int">
         UPDATE r_blog

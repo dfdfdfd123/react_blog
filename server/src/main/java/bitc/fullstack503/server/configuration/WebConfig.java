@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:///C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload"); // static 폴더 내의 upload 디렉토리
+                .addResourceLocations("file:///C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/"); // static 폴더 내의 upload 디렉토리
 //                .addResourceLocations("file:///C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/"); // static 폴더 내의 upload 디렉토리
     }
 
@@ -25,7 +25,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173");
+                .allowedOrigins("http://localhost:5173")
+                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
 }
