@@ -21,7 +21,7 @@ function Header() {
                 <Row className="justify-content-center">
                     <Col md="8">
                         <h1 style={{ fontSize: "48px", fontWeight: "bold" }}>Read Our Blog</h1>
-                        <p style={{ fontSize: "18px", marginTop: "10px" }}>사플의 사이드 프로젝트 작업블로그 입니다</p>
+                        <p style={{ fontSize: "18px", marginTop: "10px" }}>정민의 사이드 프로젝트 작업블로그 입니다</p>
                     </Col>
                 </Row>
             </Container>
