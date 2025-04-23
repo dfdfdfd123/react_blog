@@ -87,8 +87,9 @@
     <!-- 글 검색 -->
     <select id="searchBlogs" resultType="bitc.fullstack503.server.dto.BoardDTO">
         SELECT * FROM r_blog
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
-        OR contents LIKE CONCAT('%', #{keyword}, '%')
+        WHERE deleted_yn = 'N'
+        AND (title LIKE CONCAT('%', #{keyword}, '%')
+        OR contents LIKE CONCAT('%', #{keyword}, '%'))
     </select>
 
 

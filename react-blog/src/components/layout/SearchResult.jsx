@@ -28,14 +28,9 @@ function SearchResult() {
                                     <CardTitle tag="h5" className="fw-bold">{post.title}</CardTitle>
                                     <CardText className="text-muted mb-2">작성자: {post.userId}</CardText>
                                     <CardText>
-                                        {/*{post.content.length > 100*/}
-                                        {/*    ? `${post.content.slice(0, 100)}...`*/}
-                                        {/*    : post.content}*/}
-
-                                            {post.content && post.content.length > 100
-                                                ? `${post.content.slice(0, 100)}...`
-                                                : post.content || "내용 없음"}
-
+                                        {post.contents.length > 1
+                                            ? `${post.contents.slice(0, 100)}...`
+                                            : post.contents}
                                     </CardText>
                                     <div className="d-flex justify-content-end">
                                         <Button
