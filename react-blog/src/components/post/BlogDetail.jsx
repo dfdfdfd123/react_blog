@@ -159,7 +159,7 @@ function BlogDetail() {
                             </CardText>
 
                             <div className="d-flex justify-content-end">
-                                <Button color="primary" onClick={() => navigate(`/edit/${boardIdx}`)} className="me-2">
+                                <Button color="primary" onClick={() => navigate('/edit')} className="me-2">
                                     수정
                                 </Button>
                                 <Button color="danger" onClick={handleDelete}>
