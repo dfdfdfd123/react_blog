@@ -113,6 +113,19 @@ public ResponseEntity<?> deleteBoard(@PathVariable int boardIdx) {
     }
 }
 
+// 글 검색
+
+    // BlogController.java
+
+    @GetMapping("/search")
+    public ResponseEntity<List<BoardDTO>> searchBlogs(@RequestParam String keyword) {
+        try {
+            List<BoardDTO> result = boardService.searchBlogs(keyword);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
 

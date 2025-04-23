@@ -10,6 +10,7 @@ import BlogDetail from "./components/post/BlogDetail.jsx";
 import BlogEdit from "./components/post/BlogEdit.jsx";
 import { UserProvider } from "./stores/userContext.jsx";
 import Layout from "./Layout.jsx";
+import SearchResult from "./components/layout/SearchResult.jsx";
 
 
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/detail/:boardIdx" element={<BlogDetail />} />
                 {/*<Route path="/edit" element={<BlogEdit />} />*/}
                 <Route path="/edit/:boardIdx" element={<BlogEdit />} />
+                <Route path="/search" element={<SearchResult />} /> {/* ← 검색 결과 경로 추가 */}
             </Routes>
             </Layout>
         </BrowserRouter>

@@ -3,6 +3,7 @@ package bitc.fullstack503.server.mapper;
 import bitc.fullstack503.server.dto.BoardDTO;
 import bitc.fullstack503.server.dto.FileDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,11 @@ public interface BoardMapper {
      void insertBoard(BoardDTO board);
      void updateBoard(BoardDTO board);
      void deleteBoard(int boardIdx);
+
+
+
+    List<BoardDTO> searchBlogs(@Param("keyword") String keyword);
+
 
 
 }

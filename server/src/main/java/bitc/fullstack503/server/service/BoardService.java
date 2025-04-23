@@ -20,6 +20,10 @@ void updateBoard(BoardDTO board, List<MultipartFile> files) throws Exception;
 void deleteBoard(int boardIdx) throws Exception;
 
 
+List<BoardDTO> searchBlogs(String keyword);
+
+
+
 
 }
 

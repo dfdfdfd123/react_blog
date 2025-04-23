@@ -118,6 +118,13 @@ public void deleteBoard(int boardIdx) throws Exception {
     boardMapper.deleteBoard(boardIdx);
 }
 
+// 글 검색
+
+    @Override
+    public List<BoardDTO> searchBlogs(String keyword) {
+        return boardMapper.searchBlogs(keyword);
+    }
+
 }
 
 

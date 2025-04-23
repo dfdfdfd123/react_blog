@@ -9,6 +9,9 @@ const useBlogStore = create((set) => ({
     selectedPost: null,
     setSelectedPost: (post) => set({ selectedPost: post }),
 
+    // 글 검색
+    keyword: "",
+    setKeyword: (kw) => set({ keyword: kw })
 
 }));
 

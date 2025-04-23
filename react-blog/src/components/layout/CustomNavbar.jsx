@@ -1,11 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import { Navbar, NavbarBrand, Input, Button, Container } from "reactstrap";
-import { useNavigate } from "react-router-dom"; // ← 추가
+import { useNavigate } from "react-router-dom";
+import useBlogStore from "../../stores/blogStore.jsx";
+import axios from "axios"; // ← 추가
 
 
 function CustomNavbar() {
 
     const navigate = useNavigate(); // ← 추가
+
+    const [searchInput, setSearchInput] = useState("");
+    const { setPosts } = useBlogStore();
+
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/blog/search`, {
+                params: { keyword: searchInput }
+            });
+            setPosts(response.data);
+            navigate("/search");     // 검색 결과 페이지로 이동
+        } catch (error) {
+            console.error("검색 오류:", error);
+        }
+    };
 
     return (
         <Navbar dark color="dark" expand="md" className="py-2">
@@ -24,6 +41,9 @@ function CustomNavbar() {
                             placeholder="검색 하세요..."
                             className="me-2"
                             style={{ width: '700px' }}
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                         />
                         <Button color="success me-2" size="sm"  onClick={() => navigate("/write")}>글 작성</Button>
                         <Button color="secondary" size="sm" className="me-2">REGISTER</Button>
@@ -42,24 +62,3 @@ function CustomNavbar() {
 export default CustomNavbar;
 
 
-// import React from "react";
-// import { Navbar, NavbarBrand, Input, Button, Container } from "reactstrap";
-//
-// function CustomNavbar() {
-//   return (
-//       <Navbar dark color="dark" expand="md" className="py-2">
-//         <Container className="d-flex justify-content-between align-items-center">
-//           <NavbarBrand href="#" className="text-white">Side Project's Blog</NavbarBrand>
-//           <Input type="text" placeholder="Search..." className="me-3" style={{ maxWidth: '300px' }} />
-//             <Button color="success" size="sm" className="">글 작성</Button>
-//             <Button color="secondary" size="sm" className="me-2">REGISTER</Button>
-//             <Button color="secondary" size="sm">LOGIN</Button>
-//           <div>
-//
-//           </div>
-//         </Container>
-//       </Navbar>
-//   );
-// }
-//
-// export default CustomNavbar;
