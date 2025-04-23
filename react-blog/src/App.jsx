@@ -8,6 +8,8 @@ import Home from "./components/Home.jsx";
 import BlogWrite from "./components/post/BlogWrite.jsx";
 import BlogDetail from "./components/post/BlogDetail.jsx";
 import BlogEdit from "./components/post/BlogEdit.jsx";
+import { UserProvider } from "./stores/userContext.jsx";
+import Layout from "./Layout.jsx";
 
 
 
@@ -15,24 +17,21 @@ function App() {
 
 
     return (
-
+        <UserProvider>
         <BrowserRouter>
-            {/* 공통 UI (항상 보이게 할 컴포넌트들) */}
-            <CustomNavbar />
-            <Header />
+            <Layout>
 
             {/* 페이지별 라우팅 */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/write" element={<BlogWrite />} />
-                <Route path="/detail" element={<BlogDetail />} />
+                {/*<Route path="/detail" element={<BlogDetail />} />*/}
+                <Route path="/detail/:boardIdx" element={<BlogDetail />} />
                 <Route path="/edit" element={<BlogEdit />} />
             </Routes>
-
-            {/* Footer도 항상 보이게 하고 싶으면 여기 */}
-            <Footer />
+            </Layout>
         </BrowserRouter>
-
+        </UserProvider>
     );
 }
 

@@ -20,9 +20,24 @@ public class BoardServiceImpl implements BoardService {
     private final BoardMapper boardMapper;
     private final FileMapper fileMapper;
 
+
+    @Override
+    public List<BoardDTO> getBoardList() {
+        return boardMapper.selectBoardWithFiles();
+    }
+
+
     @Override
     public BoardDTO getBoardDetail(int boardIdx) {
-        return boardMapper.selectBoardDetail(boardIdx);
+
+
+        BoardDTO board = boardMapper.selectBoardDetail(boardIdx);
+        if (board != null) {
+            List<FileDTO> fileList = boardMapper.selectFilesByBoardIdx(boardIdx);
+            board.setFileList(fileList);
+        }
+        return board;
+
     }
 
     @Override
@@ -34,7 +49,8 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-                    String filePath = "C:/fullstack503/스프링개인프로젝트_임정민/SpringProject/src/main/resources/static/upload/";
+//                    String filePath = "C:/fullstack503/스프링개인프로젝트_임정민/SpringProject/src/main/resources/static/upload/";
+                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
                     file.transferTo(dest);

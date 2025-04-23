@@ -7,18 +7,18 @@
 
     <!-- 댓글 목록 조회 -->
     <select id="selectCommentsByBoardIdx" parameterType="int" resultType="bitc.fullstack503.server.dto.CommentDTO">
-        SELECT comment_idx, board_idx, user_id, content,
+        SELECT comment_id, board_id, user_id, content,
         DATE_FORMAT(created_at, '%Y.%m.%d %H:%i:%s') AS created_at,
         update_id, update_date
         FROM r_blog_comment
-        WHERE board_idx = #{boardIdx}
+        WHERE board_id = #{boardId}
         ORDER BY created_at ASC
     </select>
 
     <!-- 댓글 작성 -->
-    <insert id="insertComment" parameterType="bitc.fullstack503.server.dto.CommentDTO" useGeneratedKeys="true" keyProperty="commentIdx">
-        INSERT INTO r_blog_comment (board_idx, user_id, content, created_at)
-        VALUES (#{boardIdx}, #{userId}, #{content}, NOW())
+    <insert id="insertComment" parameterType="bitc.fullstack503.server.dto.CommentDTO" useGeneratedKeys="true" keyProperty="commentId">
+        INSERT INTO r_blog_comment (board_id, user_id, content, created_at)
+        VALUES (#{boardId}, #{userId}, #{content}, NOW())
     </insert>
 
     <!-- 댓글 수정 -->
@@ -27,13 +27,13 @@
         SET content = #{content},
         update_id = #{updateId},
         update_date = NOW()
-        WHERE comment_idx = #{commentIdx}
+        WHERE comment_id = #{commentId}
     </update>
 
     <!-- 댓글 삭제 -->
     <delete id="deleteComment" parameterType="int">
         DELETE FROM r_blog_comment
-        WHERE comment_idx = #{commentIdx}
+        WHERE comment_id = #{commentId}
     </delete>
 
 

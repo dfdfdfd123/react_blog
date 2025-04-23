@@ -5,7 +5,44 @@
 <mapper namespace="bitc.fullstack503.server.mapper.BoardMapper">
 
 
-<!--    글 조회 -->
+    <resultMap id="BoardWithFilesResultMap" type="bitc.fullstack503.server.dto.BoardDTO">
+        <id property="boardIdx" column="board_idx" />
+        <result property="title" column="title" />
+        <result property="contents" column="contents" />
+        <result property="createId" column="create_id" />
+        <result property="createDate" column="create_date" />
+        <result property="hitCnt" column="hit_cnt" />
+
+        <collection property="fileList" ofType="bitc.fullstack503.server.dto.FileDTO">
+            <id property="fileIdx" column="file_idx"/>
+            <result property="originalName" column="original_name"/>
+            <result property="storedName" column="stored_name"/>
+            <result property="filePath" column="file_path"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectBoardWithFiles" resultMap="BoardWithFilesResultMap">
+        SELECT
+        b.board_idx, b.title, b.contents, b.create_id,
+        DATE_FORMAT(b.create_date, '%Y.%m.%d %H:%i:%s') AS create_date,
+        b.hit_cnt,
+        f.file_idx, f.original_name, f.stored_name, f.file_path
+        FROM r_blog b
+        LEFT JOIN r_blog_file f ON b.board_idx = f.board_idx
+        WHERE b.deleted_yn = 'N'
+        ORDER BY b.board_idx DESC
+    </select>
+
+
+    <!-- 게시글과 관련된 파일 목록 조회 -->
+    <select id="selectFilesByBoardIdx" resultType="bitc.fullstack503.server.dto.FileDTO">
+        SELECT
+        f.file_idx, f.original_name, f.stored_name, f.file_path
+        FROM r_blog_file f
+        WHERE f.board_idx = #{boardIdx}
+    </select>
+
+<!--  자세히 보기 버튼 클릭 후 나오는,  글 상세 조회 -->
     <select id="selectBoardDetail" parameterType="int" resultType="bitc.fullstack503.server.dto.BoardDTO">
         SELECT board_idx, title, contents, create_id, DATE_FORMAT(create_date, '%Y.%m.%d %H:%i:%s') AS create_date, hit_cnt
         FROM r_blog
@@ -43,6 +80,7 @@
         update_date = NOW()
         WHERE board_idx = #{boardIdx}
     </update>
+
 
 
 </mapper>

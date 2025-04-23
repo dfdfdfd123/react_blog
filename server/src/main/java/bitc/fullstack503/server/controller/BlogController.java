@@ -2,17 +2,24 @@ package bitc.fullstack503.server.controller;
 
 import bitc.fullstack503.server.dto.BoardDTO;
 import bitc.fullstack503.server.dto.CommentDTO;
+import bitc.fullstack503.server.dto.FileDTO;
+import bitc.fullstack503.server.mapper.BoardMapper;
 import bitc.fullstack503.server.service.BoardService;
 import bitc.fullstack503.server.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@CrossOrigin({"http://localhost:5173"})
 @RestController
 @RequestMapping("/api/blog")
-@CrossOrigin(origins = "http://localhost:5173/write")
 public class BlogController {
+
+
 
     @Autowired
     private BoardService boardService;
@@ -20,13 +27,54 @@ public class BlogController {
     @Autowired
     private CommentService commentService;
 
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "서버 연결 성공!";
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<BoardDTO>> getBoardList() {
+        return ResponseEntity.ok(boardService.getBoardList());
+    }
+
+//    @GetMapping("/detail")
+//    public ResponseEntity<BoardDTO> getBoardDetail(@RequestParam int id) {
+//        return ResponseEntity.ok(boardService.getBoardDetail(id));
+//    }
+
     // 게시글 상세 조회
     @GetMapping("/{boardIdx}")
     public BoardDTO getBoardDetail(@PathVariable int boardIdx) {
         return boardService.getBoardDetail(boardIdx);
     }
 
-    // 댓글 목록 조회
+    /**
+     * 게시글 작성 + 첨부파일 업로드
+     */
+    @PostMapping("/write")
+    public ResponseEntity<String> insertBlog(@RequestParam("title") String title,
+                                             @RequestParam("createId") String createId,
+                                             @RequestParam("contents") String contents,
+                                             @RequestPart(value = "files", required = false) List<MultipartFile> files) {
+        try {
+            BoardDTO board = new BoardDTO();
+            board.setTitle(title);
+            board.setCreateId(createId);
+            board.setContents(contents);
+
+            boardService.insertBoard(board, files);
+
+            return ResponseEntity.ok("글 작성 성공");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("글 작성 실패");
+        }
+    }
+
+
+
+//     댓글 목록 조회
     @GetMapping("/{boardIdx}/comments")
     public List<CommentDTO> getComments(@PathVariable int boardIdx) {
         return commentService.getComments(boardIdx);
@@ -35,20 +83,22 @@ public class BlogController {
     // 댓글 작성
     @PostMapping("/{boardIdx}/comments")
     public void addComment(@PathVariable int boardIdx, @RequestBody CommentDTO comment) {
-        comment.setBoardIdx(boardIdx);
+        comment.setBoardId(boardIdx);
         commentService.addComment(comment);
     }
 
+
     // 댓글 수정
-    @PutMapping("/comments/{commentIdx}")
-    public void updateComment(@PathVariable int commentIdx, @RequestBody CommentDTO comment) {
-        comment.setCommentIdx(commentIdx);
+    @PutMapping("/comments/{commentId}")
+    public void updateComment(@PathVariable int commentId, @RequestBody CommentDTO comment) {
+        System.out.println("업데이트할 댓글: " + comment); // 확인
+        comment.setCommentId(commentId);
         commentService.updateComment(comment);
     }
 
     // 댓글 삭제
-    @DeleteMapping("/comments/{commentIdx}")
-    public void deleteComment(@PathVariable int commentIdx) {
-        commentService.deleteComment(commentIdx);
+    @DeleteMapping("/comments/{commentId}")
+    public void deleteComment(@PathVariable int commentId) {
+        commentService.deleteComment(commentId);
     }
 }

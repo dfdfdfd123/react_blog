@@ -7,14 +7,13 @@ function CustomNavbar() {
 
     const navigate = useNavigate(); // ← 추가
 
-
     return (
         <Navbar dark color="dark" expand="md" className="py-2">
             <Container>
                 <div className="d-flex justify-content-between align-items-center w-100">
 
                     {/* 왼쪽: Brand */}
-                    <NavbarBrand href="#" className="text-white">
+                    <NavbarBrand href="/" className="text-white" onClick={() => navigate(`/`)}>
                         Side Project's Blog
                     </NavbarBrand>
 

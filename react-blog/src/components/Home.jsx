@@ -9,6 +9,7 @@ function Home() {
     useEffect(() => {
         //   axios 를 사용하여 spring boot 서버와 통신
     }, [])
+
     return (
         <div>
           {/*<CustomNavbar/>*/}

@@ -38,12 +38,12 @@ function BlogWrite() {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/api/blog", data, {
+            const response = await axios.post("http://localhost:8080/api/blog/write", data, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            console.log(response.data); // 이렇게라도 쓰면 경고 사라짐
+            console.log(response.data);
             alert("글이 성공적으로 등록되었습니다!");
         } catch (error) {
             console.error("업로드 오류:", error);
@@ -58,6 +58,7 @@ function BlogWrite() {
             <section>
                 <div className="row mt-3">
                     <div className="col-sm-4 mx-auto">
+
                         <form onSubmit={handleSubmit}>
                             <div className="mt-3 form-floating">
                                 <input type="text" className="form-control" id="title" name="title"
@@ -71,7 +72,7 @@ function BlogWrite() {
                             </div>
                             <div className="mt-3 form-floating">
                                 <textarea className="form-control" id="contents" name="contents"
-                                          placeholder="글 내용" style={{ height: "150px" }}
+                                          placeholder="글 내용" style={{height: "150px"}}
                                           onChange={handleChange}></textarea>
                                 <label htmlFor="contents">글 내용</label>
                             </div>
