@@ -85,11 +85,25 @@
 
 
     <!-- 글 검색 -->
-    <select id="searchBlogs" resultType="bitc.fullstack503.server.dto.BoardDTO">
-        SELECT * FROM r_blog
-        WHERE deleted_yn = 'N'
-        AND (title LIKE CONCAT('%', #{keyword}, '%')
-        OR contents LIKE CONCAT('%', #{keyword}, '%'))
+<!--    <select id="searchBlogs" resultType="bitc.fullstack503.server.dto.BoardDTO">-->
+<!--        SELECT * FROM r_blog-->
+<!--        WHERE deleted_yn = 'N'-->
+<!--        AND (title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        OR contents LIKE CONCAT('%', #{keyword}, '%'))-->
+<!--    </select>-->
+
+    <select id="searchBlogs" resultMap="BoardWithFilesResultMap">
+        SELECT
+        b.board_idx, b.title, b.contents, b.create_id,
+        DATE_FORMAT(b.create_date, '%Y.%m.%d %H:%i:%s') AS create_date,
+        b.hit_cnt,
+        f.file_idx, f.original_name, f.stored_name, f.file_path
+        FROM r_blog b
+        LEFT JOIN r_blog_file f ON b.board_idx = f.board_idx
+        WHERE b.deleted_yn = 'N'
+        AND (b.title LIKE CONCAT('%', #{keyword}, '%') OR b.contents LIKE CONCAT('%', #{keyword}, '%'))
+        ORDER BY b.board_idx DESC
+
     </select>
 
 

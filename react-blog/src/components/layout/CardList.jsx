@@ -32,14 +32,39 @@ function CardList() {
                 {posts.map((card) => (
                     <Col md="4" className="mb-4" key={card.boardIdx}>
                         <Card>
-                            {card.fileList && card.fileList.length > 0 && (
+                            {/*{card.fileList && card.fileList.length > 0 && (*/}
+                            {/*    <CardImg*/}
+                            {/*        top*/}
+                            {/*        width="100%"*/}
+                            {/*        src={`http://localhost:8080${card.fileList[0].filePath}`}*/}
+                            {/*        alt="카드 이미지"*/}
+                            {/*    />*/}
+                            {/*)}*/}
+
+                            {card.fileList && card.fileList.length > 0 ? (
                                 <CardImg
                                     top
                                     width="100%"
                                     src={`http://localhost:8080${card.fileList[0].filePath}`}
                                     alt="카드 이미지"
+                                    style={{ height: "450px", objectFit: "cover" }}
                                 />
+                            ) : (
+                                <div
+                                    style={{
+                                        height: "450px",
+                                        backgroundColor: "#f0f0f0",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        color: "#aaa"
+                                    }}
+                                >
+                                    이미지 없음
+                                </div>
                             )}
+
+
                             <CardBody>
                                 <CardTitle tag="h5">{card.title}</CardTitle>
                                 <CardText>{card.contents.substring(0, 50)}...</CardText>

@@ -24,6 +24,37 @@ function SearchResult() {
                     posts.map((post) => (
                         <Col key={post.boardIdx} md="4" className="mb-4">
                             <Card className="h-100 shadow-sm">
+                                {/*{post.fileList && post.fileList.length > 0 && (*/}
+                                {/*    <img*/}
+                                {/*        src={`http://localhost:8080${post.fileList[0].filePath}`}*/}
+                                {/*        alt="카드 이미지"*/}
+                                {/*        className="card-img-top"*/}
+                                {/*    />*/}
+                                {/*)}*/}
+                                {post.fileList && post.fileList.length > 0 ? (
+                                    <img
+                                        src={`http://localhost:8080${post.fileList[0].filePath}`}
+                                        alt="카드 이미지"
+                                        className="card-img-top"
+                                        style={{ height: "450px", objectFit: "cover" }}
+                                    />
+                                ) : (
+                                    <div
+                                        className="card-img-top"
+                                        style={{
+                                            height: "450px",
+                                            backgroundColor: "#f0f0f0",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            color: "#aaa",
+                                            fontSize: "0.9rem",
+                                        }}
+                                    >
+                                        이미지 없음
+                                    </div>
+                                )}
+
                                 <CardBody>
                                     <CardTitle tag="h5" className="fw-bold">{post.title}</CardTitle>
                                     <CardText className="text-muted mb-2">작성자: {post.userId}</CardText>

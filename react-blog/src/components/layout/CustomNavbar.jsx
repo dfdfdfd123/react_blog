@@ -40,14 +40,14 @@ function CustomNavbar() {
                             type="text"
                             placeholder="검색 하세요..."
                             className="me-2"
-                            style={{ width: '700px' }}
+                            style={{ width: '800px' /* 700px */ }}
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                         />
                         <Button color="success me-2" size="sm"  onClick={() => navigate("/write")}>글 작성</Button>
-                        <Button color="secondary" size="sm" className="me-2">REGISTER</Button>
-                        <Button color="secondary" size="sm">LOGIN</Button>
+                        {/*<Button color="secondary" size="sm" className="me-2">REGISTER</Button>*/}
+                        {/*<Button color="secondary" size="sm">LOGIN</Button>*/}
                     </div>
 
                     {/* 오른쪽: 회원 관련 버튼 */}
