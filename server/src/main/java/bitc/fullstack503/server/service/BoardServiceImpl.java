@@ -4,6 +4,8 @@ import bitc.fullstack503.server.dto.BoardDTO;
 import bitc.fullstack503.server.dto.FileDTO;
 import bitc.fullstack503.server.mapper.BoardMapper;
 import bitc.fullstack503.server.mapper.FileMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,14 +30,20 @@ public class BoardServiceImpl implements BoardService {
 
 // 글 상세 보기
     @Override
-    public BoardDTO getBoardDetail(int boardIdx) {
+    public BoardDTO getBoardDetail(int boardIdx) throws Exception {
+
+
+        boardMapper.updateHitCnt(boardIdx);
 
 
         BoardDTO board = boardMapper.selectBoardDetail(boardIdx);
+
         if (board != null) {
+
             List<FileDTO> fileList = boardMapper.selectFilesByBoardIdx(boardIdx);
             board.setFileList(fileList);
         }
+
         return board;
 
     }
@@ -50,8 +58,8 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
-//                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
+//                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
                     file.transferTo(dest);
@@ -78,7 +86,8 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+//                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
                     file.transferTo(dest);
@@ -103,7 +112,8 @@ public void deleteBoard(int boardIdx) throws Exception {
     // 2. 파일 시스템에서 삭제
     if (fileList != null && !fileList.isEmpty()) {
         for (FileDTO file : fileList) {
-            String fullPath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath();
+//            String fullPath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath();
+            String fullPath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static" + file.getFilePath();
             File targetFile = new File(fullPath);
             if (targetFile.exists()) {
                 targetFile.delete();

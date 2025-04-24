@@ -7,6 +7,8 @@ import bitc.fullstack503.server.mapper.BoardMapper;
 import bitc.fullstack503.server.service.BoardService;
 import bitc.fullstack503.server.service.CommentService;
 import bitc.fullstack503.server.service.FileService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +51,7 @@ public class BlogController {
 
     // 게시글 상세 조회
     @GetMapping("/{boardIdx}")
-    public BoardDTO getBoardDetail(@PathVariable int boardIdx) {
+    public BoardDTO getBoardDetail(@PathVariable int boardIdx) throws Exception {
         return boardService.getBoardDetail(boardIdx);
     }
 

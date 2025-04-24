@@ -57,7 +57,7 @@
     </insert>
 
     <!-- 조회수 증가 -->
-    <update id="updateHitCount" parameterType="int">
+    <update id="updateHitCnt" parameterType="int">
         UPDATE r_blog
         SET hit_cnt = hit_cnt + 1
         WHERE board_idx = #{boardIdx}

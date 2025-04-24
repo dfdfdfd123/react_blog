@@ -28,7 +28,7 @@ public interface BoardMapper {
      void deleteBoard(int boardIdx);
 
 
-
+    void updateHitCnt(@Param("boardIdx") int boardIdx) throws Exception;
     List<BoardDTO> searchBlogs(@Param("keyword") String keyword);
 
 
