@@ -1,11 +1,11 @@
 
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useState} from "react";
 import axios from "axios";
 
 function BlogWrite() {
 
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: '',
         createId: '',
@@ -45,6 +45,7 @@ function BlogWrite() {
             });
             console.log(response.data);
             alert("글이 성공적으로 등록되었습니다!");
+            navigate("/");
         } catch (error) {
             console.error("업로드 오류:", error);
             alert("오류 발생");

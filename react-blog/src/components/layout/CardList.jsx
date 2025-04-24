@@ -13,6 +13,7 @@ function CardList() {
     const navigate = useNavigate();
     const { posts, setPosts } = useBlogStore();
 
+    // 글 불러오기
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -52,7 +53,7 @@ function CardList() {
                             ) : (
                                 <div
                                     style={{
-                                        height: "450px",
+                                        height: "472px",
                                         backgroundColor: "#f0f0f0",
                                         display: "flex",
                                         justifyContent: "center",
@@ -66,8 +67,8 @@ function CardList() {
 
 
                             <CardBody>
-                                <CardTitle tag="h5">{card.title}</CardTitle>
-                                <CardText>{card.contents.substring(0, 50)}...</CardText>
+                                <CardTitle tag="h5" className="fw-bold">{card.title}</CardTitle>
+                                <CardText className="text-muted mb-2">{card.contents.substring(0, 50)}...</CardText>
                                 <Button color="primary" onClick={() => navigate(`/detail/${card.boardIdx}`)}>
                                     자세히 보기
                                 </Button>

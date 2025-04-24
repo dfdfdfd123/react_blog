@@ -57,7 +57,7 @@ function SearchResult() {
 
                                 <CardBody>
                                     <CardTitle tag="h5" className="fw-bold">{post.title}</CardTitle>
-                                    <CardText className="text-muted mb-2">작성자: {post.userId}</CardText>
+                                    <CardText className="text-muted mb-2">작성자: {post.createId}</CardText>
                                     <CardText>
                                         {post.contents.length > 1
                                             ? `${post.contents.slice(0, 100)}...`

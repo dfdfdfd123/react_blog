@@ -19,8 +19,8 @@ public class FileServiceImpl implements FileService {
         FileDTO file = fileMapper.selectFileByStoredName(storedName);
         if (file != null) {
             // 실제 파일 삭제
-//            File f = new File("C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath());
-            File f = new File("C:/fullstack503/reast/react_blog/server/src/main/resources/static" + file.getFilePath());
+            File f = new File("C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath());
+//            File f = new File("C:/fullstack503/reast/react_blog/server/src/main/resources/static" + file.getFilePath());
             if (f.exists()) f.delete();
 
             // DB 삭제

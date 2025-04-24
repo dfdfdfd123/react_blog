@@ -58,8 +58,8 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-//                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
-                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
+                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+//                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
                     file.transferTo(dest);
@@ -86,8 +86,8 @@ public class BoardServiceImpl implements BoardService {
                 if (!file.isEmpty()) {
                     String originalName = file.getOriginalFilename();
                     String storedName = UUID.randomUUID() + "_" + originalName;
-//                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
-                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
+                    String filePath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static/upload/";
+//                    String filePath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static/upload/";
 
                     File dest = new File(filePath + storedName);
                     file.transferTo(dest);
@@ -112,8 +112,8 @@ public void deleteBoard(int boardIdx) throws Exception {
     // 2. 파일 시스템에서 삭제
     if (fileList != null && !fileList.isEmpty()) {
         for (FileDTO file : fileList) {
-//            String fullPath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath();
-            String fullPath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static" + file.getFilePath();
+            String fullPath = "C:/Users/user/Documents/react_blog/server/src/main/resources/static" + file.getFilePath();
+//            String fullPath = "C:/fullstack503/reast/react_blog/server/src/main/resources/static" + file.getFilePath();
             File targetFile = new File(fullPath);
             if (targetFile.exists()) {
                 targetFile.delete();
