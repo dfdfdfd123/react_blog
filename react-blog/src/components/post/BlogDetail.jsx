@@ -151,11 +151,10 @@ function BlogDetail() {
                     <Card>
                         <CardBody>
                             <CardTitle tag="h3">{board.title}</CardTitle>
-                            <CardText className="text-muted">
+                            <CardText className="text-muted text-end">
                                 조회수: {board.hitCnt} | 작성일: {board.createDate}
                             </CardText>
                             <hr />
-                            <CardText>{board.contents}</CardText>
 
                             {/* 이미지 렌더링 */}
                             {board.fileList && board.fileList.length > 0 && (
@@ -174,7 +173,7 @@ function BlogDetail() {
                             )}
 
                             <CardText>
-                                이미지를 포함한 설명이 이어집니다. 이 블로그는 부트스트랩과 리액트를 활용하여 만든 예제입니다.
+                                {board.contents}
                             </CardText>
 
                             <div className="d-flex justify-content-end">
