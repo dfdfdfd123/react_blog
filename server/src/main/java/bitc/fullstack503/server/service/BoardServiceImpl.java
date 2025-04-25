@@ -4,10 +4,7 @@ import bitc.fullstack503.server.dto.BoardDTO;
 import bitc.fullstack503.server.dto.FileDTO;
 import bitc.fullstack503.server.mapper.BoardMapper;
 import bitc.fullstack503.server.mapper.FileMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -129,7 +126,6 @@ public void deleteBoard(int boardIdx) throws Exception {
 }
 
 // 글 검색
-
     @Override
     public List<BoardDTO> searchBlogs(String keyword) {
         return boardMapper.searchBlogs(keyword);

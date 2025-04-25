@@ -4,8 +4,6 @@
 
 package bitc.fullstack503.server.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 

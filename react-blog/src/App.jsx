@@ -8,7 +8,6 @@ import Home from "./components/Home.jsx";
 import BlogWrite from "./components/post/BlogWrite.jsx";
 import BlogDetail from "./components/post/BlogDetail.jsx";
 import BlogEdit from "./components/post/BlogEdit.jsx";
-import { UserProvider } from "./stores/userContext.jsx";
 import Layout from "./Layout.jsx";
 import SearchResult from "./components/layout/SearchResult.jsx";
 
@@ -18,7 +17,6 @@ function App() {
 
 
     return (
-        <UserProvider>
         <BrowserRouter>
             <Layout>
 
@@ -34,7 +32,6 @@ function App() {
             </Routes>
             </Layout>
         </BrowserRouter>
-        </UserProvider>
     );
 }
 

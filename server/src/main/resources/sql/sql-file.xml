@@ -23,6 +23,4 @@
         WHERE board_idx = #{boardIdx}
     </delete>
 
-
-
 </mapper>

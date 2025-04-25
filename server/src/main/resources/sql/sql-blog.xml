@@ -106,38 +106,4 @@
 
     </select>
 
-
-
-
 </mapper>
-
-<!--    &lt;!&ndash;    글 작성 &ndash;&gt;-->
-<!--    <insert id="insertBoard" parameterType="bitc.fullstack503.server.dto.BoardDTO" useGeneratedKeys="true"-->
-<!--            keyProperty="boardIdx">-->
-<!--        insert into blog_board (title, contents, create_id, create_date)-->
-<!--        values (#{title}, #{contents}, #{createId}, now())-->
-<!--    </insert>-->
-
-<!--&lt;!&ndash;    조회수 증가&ndash;&gt;-->
-<!--    <update id="updateHitCnt" parameterType="int">-->
-<!--        update blog_board-->
-<!--        set hit_cnt = hit_cnt + 1-->
-<!--        where board_idx = #{boardIdx}-->
-<!--    </update>-->
-
-<!--    &lt;!&ndash;    글 삭제&ndash;&gt;-->
-<!--    &lt;!&ndash;    Mapper 파일에서 @Param 어노테이션을 사용했을 경우 지정한 이름을 변수명으로 사용해야 함 &ndash;&gt;-->
-<!--    <update id="deleteBoard" parameterType="int">-->
-<!--        UPDATE blog_board-->
-<!--        SET deleted_yn = 'Y'-->
-<!--        WHERE board_idx = #{boardIdx}-->
-<!--        &lt;!&ndash;        WHERE board_idx = #{idx}&ndash;&gt;-->
-<!--    </update>-->
-
-<!--    &lt;!&ndash;    글 수정&ndash;&gt;-->
-<!--    <update id="updateBoard" parameterType="bitc.fullstack503.server.dto.BoardDTO">-->
-<!--        update blog_board-->
-<!--        set title = #{title}, contents = #{contents}, update_id = #{createId}, update_date = now()-->
-<!--        where board_idx = #{boardIdx}-->
-<!--    </update>-->
-

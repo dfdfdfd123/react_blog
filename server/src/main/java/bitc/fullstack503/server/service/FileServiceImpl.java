@@ -1,7 +1,6 @@
 package bitc.fullstack503.server.service;
 
 import bitc.fullstack503.server.dto.FileDTO;
-import bitc.fullstack503.server.mapper.CommentMapper;
 import bitc.fullstack503.server.mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

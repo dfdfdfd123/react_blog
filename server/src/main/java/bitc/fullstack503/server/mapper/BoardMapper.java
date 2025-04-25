@@ -14,9 +14,6 @@ public interface BoardMapper {
 
     List<BoardDTO> selectBoardWithFiles();
 
-    // 파일을 포함한 게시글 목록 조회
-//    BoardDTO selectBoardDetail(@Param("boardIdx") int boardIdx);  // 게시글 상세 조회
-
 //    글 상세보기
     BoardDTO selectBoardDetail(int boardIdx);
     List<FileDTO> selectFilesByBoardIdx(int boardIdx);

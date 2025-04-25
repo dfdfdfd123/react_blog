@@ -44,10 +44,6 @@ public class BlogController {
         return ResponseEntity.ok(boardService.getBoardList());
     }
 
-//    @GetMapping("/detail")
-//    public ResponseEntity<BoardDTO> getBoardDetail(@RequestParam int id) {
-//        return ResponseEntity.ok(boardService.getBoardDetail(id));
-//    }
 
     // 게시글 상세 조회
     @GetMapping("/{boardIdx}")
@@ -55,9 +51,7 @@ public class BlogController {
         return boardService.getBoardDetail(boardIdx);
     }
 
-    /**
-     * 게시글 작성 + 첨부파일 업로드
-     */
+//  게시글 작성 + 첨부파일 업로드
     @PostMapping("/write")
     public ResponseEntity<String> insertBlog(@RequestParam("title") String title,
                                              @RequestParam("createId") String createId,
@@ -116,8 +110,6 @@ public ResponseEntity<?> deleteBoard(@PathVariable int boardIdx) {
 }
 
 // 글 검색
-
-    // BlogController.java
 
     @GetMapping("/search")
     public ResponseEntity<List<BoardDTO>> searchBlogs(@RequestParam String keyword) {
